@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/header') %>
+        <link href="css/styles-login.css" rel="stylesheet">
+    </header>
+
+    <main>
+        
+        <h3 class="forms-subTitle">Ingresar</h3>
+        
+        <div class="forms">
+            <form action="/login" method="POST">
+
+                <div>
+                    <input type="text" name="loginEmail" id="loginEmail" minlength="2" size="40" class="inputText" placeholder="Email" required>
+                
+                </div><br>
+                
+                <div>
+                    <input type="password" name="loginPassword" id="loginPassword" size="40" class="inputText" placeholder="Contraseña"required>
+                </div><br>
+
+                <div>
+                    <label><input type="checkbox" name="remember" id="remember" value="remember">&nbsp; Recordarme</label>
+                </div><br>
+
+                <% if (errors == "") { %> 
+                    <% }else{ %><%= errors %>
+                    <% } %>
+                    <br>
+
+                <div class="buttonContainer">
+                    <button type="submit" class="formsButton">Entrar</button>       
+                </div> 
+
+            </form>
+        </div> <br>
+
+        <div class="banner">
+            <img src="img/banner-michelin.jpeg" class="bannerDunlop" alt="bannerMichelin">
+        </div><br>
+
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+    <link href="css/styles-productCart.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/header') %>
+    </header>
+
+    <main>
+    <h3 class="forms-subTitle">Perfil de usuario</h3><br>
+
+    <div class="productsBox">
+        <div class="boxTitle">
+            Datos del usuario
+        </div>
+
+
+
+        <div class="itemsColumn">
+
+            <div class="item1">
+        
+                <div class="description">
+                    <span>Nombre: <%=user.name%></span><br>
+                    <span>Apellido: <%=user.lastName%></span><br>
+                    <span>EMail: <%=user.email%></span><br>
+                    <span>Dirección: <%=user.address%></span><br>
+                    <span>Ciudad: <%=user.city%></span><br>
+                    <span>País: <%=user.country%></span><br>
+                    <span>Código Postal: <%=user.postalcode%></span><br>
+                    <span>Teléfono: <%=user.phone%></span>
+                </div><br>
+        
+                <div class="product-removal">
+                    <a href="">
+                    <button class="formsButtonShowProducts">
+                    Modificar
+                    </button>
+                    </a>
+                </div><br>
+            </div>
+        </div>
+    </div>
+
+        <div class="banner">
+            <img src="img/bannerDunlop.png" class="bannerDunlop" alt="bannerDunlop">
+        </div>
+    </main>
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

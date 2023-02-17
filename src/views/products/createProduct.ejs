@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+    <link href="/css/styles-createProduct.css" rel="stylesheet">
+    <link href="/css/styles-editProduct.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/header') %>
+    </header>
+
+    <main>
+        <h3 class="forms-subTitle">Usted a ingresado como administrador del sitio</h3><br>
+
+        <h3 class="forms-subTitle">Página de creación de productos</h3><br> 
+
+        <form action="/guardar-producto" method="POST" enctype="multipart/form-data">
+
+            <div class="artBox">
+                
+                <div class="middleBox">
+        
+                    <div class="artTitle">
+                        <h3>Marca: </h3><input type="text" name="brand" id="brand" minlength="2" placeholder="Ingrese marca" class="inputText">
+                    </div>
+        
+                    <div class="artTitle">
+                        <h3>Modelo: </h3><input type="text" name="model" id="model" minlength="2" placeholder="Ingrese modelo" class="inputText">
+                    </div>
+        
+                    <div class="artTitle">
+                        <h3>Medidas: </h3><input type="text" name="measures" id="measures" minlength="2" placeholder="Ingrese medidas ej: 120/70-17" class="inputText">
+                    </div>
+        
+                    <div class="artTitle">
+                        <h3>Precio: </h4><input type="text" name="price" id="price" placeholder="Ingrese precio, solo números" class="inputText" size="6">
+                    </div>
+        
+                    <div class="artTitle">
+                        <h3>Descuento: </h4><input type="text" name="discount" id="discount" placeholder="Ingresar descuento, solo números" class="inputText" size="6">
+                    </div>
+        
+                    <div class="artTitle">
+                        <h3>Disponibilidad:  </h4><input type="text" name="availability" id="availability" placeholder="Ingresar disponibilidad, solo números" class="inputText" size="6">
+                    </div>
+        
+                </div>
+        
+                <div class="artTitle">
+                    <h3>Categoria: </h3><br>
+                        <input type="radio" id="category" name="category" value="in-sale" placeholder="in-sale">
+                        <label for="in-sale">En oferta</label><br>
+                        <input type="radio" id="category" name="category" value="none" placeholder="none">
+                        <label for="none">Sin oferta</label><br>
+                </div>
+        
+                <br><br>
+        
+                <div class="artDetail">
+                    <span>Descripción principal del producto:</span> <textarea class="textarea"  id="description" name="description" placeholder="Ingrese aquí la descripción principal."></textarea>
+                </div>
+        
+        
+                <div class="artDetail">
+                    <span>Descripción secundaria del producto:</span> <textarea class="textarea"  id="subDescription" name="subDescription" placeholder="Ingrese aquí la descripción secundaria."></textarea>
+                </div>
+        
+                <div class="photoBox">
+                    <label for="img"><b>Foto principal del producto: </label></b><br>
+                    <input type="file" accept=".jpg, .png, .jpeg" name="img" id="img" required>
+                </div><br>
+        
+                <div class="photoBox">
+                    <label for="subImgs"><b>Fotos del producto (2Max): </label></b><br>
+                    <input type="file" accept=".jpg, .png, .jpeg" name="subImgs" id="subImgs" required multiple>
+                </div><br>
+        
+                <div class="artButtonBox">
+                    <input type="submit" class="artButton" value="Crear producto" onclick="return confirm('¿Estás seguro que deseas crear este producto?');">
+                </div>
+        
+                <div class="artButtonBox">
+                    <input type="reset" class="artButton" value="Reestablecer formulario">
+                </div>
+        
+            </div>
+        
+        </form>
+
+        <br>
+
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

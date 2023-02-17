@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+    <link href="/css/styles-productDetail.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/header') %>
+    </header>
+
+    <main><br>
+        <h3 class="forms-subTitle">Detalle del producto</h3><br>
+
+        <div class="productDetailBox">
+
+            <div class="productTitle">
+                <div class="product">Marca: <%=product.brand%></div>
+                <div class="product">Modelo: <%=product.model%></div>
+                <div class="product">Medidas: <%=product.measures%></div>
+                <p class="detail"><%=product.description%></p>
+                <div class="availability">
+                    <% if (product.availability >= 1) { %>
+                        <p class="detail">Disponibilidad: Entrega inmediata</p> <img class="point" src="https://img.icons8.com/emoji/48/null/green-circle-emoji.png"/>
+                    <% }else{ %>
+                        <p class="detail">Disponibilidad: Sin stock</p> <img class="point" src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png"/>
+                    <% } %>
+                </div>
+                <div class="product">Precio: <%=product.price%>e</div>
+            </div><br>
+
+            <div class="addCart">
+                <b><a href="/mis-compras"><span class="addCartText">Agregar a mi carrito de compras</span></b>&nbsp;&nbsp;<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAYAAAAeP4ixAAAABmJLR0QA/wD/AP+gvaeTAAACjklEQVRoge2Zv2sUQRTHPxsD/ujSqWcQgkhSWIjYeIKWBmtJFbEJVtr5Z9hqYaFg5FCx0dikMVGxsxBSaGMRFRU9NNj4KzmLN8vunfvjZubN7p74gWGXvXkz3zf73szOHPyneZwG3gK9gvIFeAycA6J6ZJbzjmInBssiDXXmDYnI9YzfI2AvsAB8M/XOVqbOglnEmXXgVEndBcSR56FFhWY78BlxZqZmLX2MWdb/ASyb+5PKWrywdQRg1VxPaAqpg2kktD7S0NnLhnjKnq5bSIxLaAE8MdfG5ImrI/9MnswgofWeEc+TCPhAw/LElTvYfaOFKI9iMa45ArDiYavFZHzj48hqeZXg3NRoJEIWxbrCaguYisX4vJEeyXriQhs47mG/Arz2sO/jAu4jGuNqP6/lBMChmhzZAHZpOhIBn2pw5NqgEJ8ciUX45Ikr10M0epHyETxm0V67pK1XZHwW+b4RGG49semnrO4N+kNTjTGSfXzoHNkktZoPivBlC3iq0M4wLCMnPn+h4QhU97kSJMnTHCZ8aHWBHXkCxpUceYGcD09Y2LSx25R1gO82oly5j/sqP0w5UtS5Vo5A2DxZo+SYVtORkBut4EmeZhuSJ9oh9QvYXda55hvZRH896QFXkIOOSrlkOr9adcfaHEUceVm3EF/GkU1PD/mXqzI0cwTgN8k0PKvcduWcR97IM0b8OHWCJLwuA/uRqXkkmUPCTGstqfUw8EyOKJfyE9hTrfyEW0bEA6BlypJ51smx6RTYLAbWm0v8t0Mr9WySZG+RRbfA5mtRZ9rTb5qd5po1c+Ulf7w/atRsdw8ZySVgnykPzbO7ijbBOUj26UoXOKBoUwkt4Dayrmwgo1omyMWGP64Ls9o5uLiXAAAAAElFTkSuQmCC" class="cartIcon" width="25"></a>
+            </div><br>
+
+            <div class="addCart">
+                <b><a href="/modificar-producto/<%=product.id%>"><span class="addCartText">Modificar producto</span></b></a>
+            </div><br>
+
+            <div class="imgProduct">
+                <img src="/img/<%=product.img%>">
+                <% if (product.subImgs) { %>
+                <% for (let i= 0; i<product.subImgs.length; i++){ %>
+                    <img src="/img/<%=product.subImgs[i]%>">
+                <% } %>
+                <% } %>
+            </div><br>
+
+            <div class="productDetail">
+                <p class="detail detail2"><%=product.subDescription%></p>
+
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

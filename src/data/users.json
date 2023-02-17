@@ -1,0 +1,58 @@
+[
+  {
+    "name": "admin",
+    "lastName": "admin",
+    "email": "admin@mototire.com",
+    "address": "Mototire",
+    "city": "Mototire",
+    "country": "Mototire",
+    "postalcode": "Mototire",
+    "phone": "000",
+    "userPassword": "$2b$04$yWVVIM1F1p/YdDJ2DWTYN.t0W5fq/pO5yDBMSeomNINhSP9vxtlDe",
+    "confirmPassword": "$2b$04$yWVVIM1F1p/YdDJ2DWTYN.t0W5fq/pO5yDBMSeomNINhSP9vxtlDe",
+    "id": "1",
+    "role": "admin"
+  },
+  {
+    "name": "test",
+    "lastName": "test",
+    "email": "test@mototire.com",
+    "address": "test",
+    "city": "test",
+    "country": "test",
+    "postalcode": "test",
+    "phone": "000",
+    "userPassword": "$2b$04$yWVVIM1F1p/YdDJ2DWTYN.t0W5fq/pO5yDBMSeomNINhSP9vxtlDe",
+    "confirmPassword": "$2b$04$yWVVIM1F1p/YdDJ2DWTYN.t0W5fq/pO5yDBMSeomNINhSP9vxtlDe",
+    "id": "2",
+    "role": "user"
+  },
+  {
+    "name": "Donnovan",
+    "lastName": "Facchini",
+    "email": "facchini.donnovan@gmail.com",
+    "address": "Sant Joaquim 19",
+    "city": "PMI",
+    "country": "España",
+    "postalcode": "07003",
+    "phone": "671312846",
+    "userPassword": "$2b$04$EI8yMrHs1mESkNw008NRDOBsumnCrOB.0bdPxn/TP19ZJNSvRKsf6",
+    "confirmPassword": "$2b$04$EI8yMrHs1mESkNw008NRDOBsumnCrOB.0bdPxn/TP19ZJNSvRKsf6",
+    "id": "3",
+    "role": "user"
+  },
+  {
+    "name": "asdfa",
+    "lastName": "asdf",
+    "email": "asdf@mototire.com",
+    "address": "asdf",
+    "city": "asdf",
+    "country": "asdf",
+    "postalcode": "1234",
+    "phone": "1234",
+    "userPassword": "$2b$04$uk5hjUEm7QrMZ93ddu3B4ei28qyudlg73rdM03DRx0d9pS9vJQMUq",
+    "confirmPassword": "$2b$04$uk5hjUEm7QrMZ93ddu3B4ei28qyudlg73rdM03DRx0d9pS9vJQMUq",
+    "id": "4",
+    "role": "user"
+  }
+]

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+    <link href="/css/styles-createProduct.css" rel="stylesheet">
+    <link href="/css/styles-editProduct.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/header') %>
+    </header>
+
+    <main>
+        <h3 class="forms-subTitle">Usted a ingresado como administrador del sitio</h3><br>
+
+        <h3 class="forms-subTitle">Página de eliminación de producto</h3><br><br><br>
+        
+        <form action="/eliminar-producto/<%= product.id %>?_method=DELETE" method="post">
+
+        <div class="artBox">
+
+            <div class="deleteIdBox">
+
+                <div class="artTitle">
+                    <h3>ID de producto:  <%=product.id%></h3>
+                </div>
+
+                <div class="artTitle">
+                    <h3>Marca:  <%=product.brand%></h3>
+                </div>
+
+                <div class="artTitle">
+                    <h3>Modelo:  <%=product.model%></h3>
+                </div>
+
+                <div class="artTitle">
+                    <h3>Medidas:  <%=product.measures%></h3>
+                </div>
+
+                <div class="artTitle">
+                    <h3>Precio:  <%=product.price%></h3>
+                </div>
+
+            </div>
+
+            <br>
+
+            <div class="artButtonBox">
+                <button class="artButton" onclick="return confirm('¿Estás seguro que deseas eliminar este producto?');">Eliminar producto</button>
+            </div>
+
+        </form>
+
+            <div class="artButtonBox">
+                <button class="artButton"><a href="/detalle-producto/<%=product.id%>"><label class="linkButton">Volver a vista de producto</label></a></button>
+            </div>
+
+        </div>
+
+
+
+        <br>
+
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

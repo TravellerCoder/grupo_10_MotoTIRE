@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('partials/head') %>
+    <link href="css/styles-index.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include ('partials/header') %>
+    </header>
+
+    <main>
+
+        <h3 class ="user"><% if (userFinded == "") { %>
+            <% }else{ %> Bienvenido <%= userFinded.name %>  <%= userFinded.lastName %>
+            <% } %>
+        </h3>
+
+        <div class="mainLogo">
+            <img src="img/MainLogoPNG.png" class="LogoPrincipal" alt="MainLogo" width="300">
+        </div>
+
+        <div class="welcome">
+            <p class="mainTitle">LOS MEJORES NEUMÁTICOS PARA TU MOTO</p>
+            <p class="main-subTitle">Especialista del neumático, MotoTire se compromete a satisfacer cada uno de sus clientes ofreciéndoles una amplia variedad de referencias y marcas.<br>
+
+            Moto cross, de carretera, enduro o deportiva, a cada tipo de moto corresponde un tipo de neumático recomendado en nuestro sitio y disponible al mejor precio del mercado.</p>
+        </div>
+
+        <div class="searcher">
+            <form>
+                <div class="textSearcher">
+                    <span class="textSearcherTitle">Buscador de neumáticos</span>
+                </div>
+                <div class="inputSearcher">
+                    <input type="text" name="searcher" id="searcher" minlength="2" class="searcherInput" placeholder="Ej.: 180/55-17">
+                </div>
+                <div class="buttonSearcherBox">
+                    <button type="submit" class="searcherButton">Buscar</button>       
+                </div> 
+            </form>
+        </div>
+
+        <div class="slide">
+            <div class="slide-inner">
+                <input class="slide-open" type="radio" id="slide-1" 
+                    name="slide" aria-hidden="true" hidden="" checked="checked">
+                <div class="slide-item">
+                    <img src="img/banner-enduro.jpeg">
+                </div>
+                <input class="slide-open" type="radio" id="slide-2" 
+                    name="slide" aria-hidden="true" hidden="">
+                <div class="slide-item">
+                    <img src="img/banner-michelin.jpeg">
+                </div>
+                <input class="slide-open" type="radio" id="slide-3" 
+                    name="slide" aria-hidden="true" hidden="">
+                <div class="slide-item">
+                    <img src="img/banner-tires.jpeg">
+                </div>
+                <label for="slide-3" class="slide-control prev control-1">‹</label>
+                <label for="slide-2" class="slide-control next control-1">›</label>
+                <label for="slide-1" class="slide-control prev control-2">‹</label>
+                <label for="slide-3" class="slide-control next control-2">›</label>
+                <label for="slide-2" class="slide-control prev control-3">‹</label>
+                <label for="slide-1" class="slide-control next control-3">›</label>
+                <ol class="slide-indicador">
+                    <li>
+                        <label for="slide-1" class="slide-circulo">•</label>
+                    </li>
+                    <li>
+                        <label for="slide-2" class="slide-circulo">•</label>
+                    </li>
+                    <li>
+                        <label for="slide-3" class="slide-circulo">•</label>
+                    </li>
+                </ol>
+            </div>
+        </div>
+
+        <h3 class="forms-subTitle">Ofertas</h3><br>
+
+            <div class="products">
+
+                <% inSaleProducts.forEach(inSaleProduct => { %>
+                
+                <article class="art1">
+                    <div class="imgProduct">
+                        <a href="detalle-producto/<%=inSaleProduct.id%>"><img src="/img/<%=inSaleProduct.img%>" class="mainProductImg" alt="ProductIMG" ></a>
+                    </div>
+                    <div class="main-article">
+                        <div class="precio-descuento">
+                            <p class="price"><%= inSaleProduct.price * (1 - inSaleProduct.discount / 100) %>e</p>
+                            <p class="discount"><% if (inSaleProduct.discount > 0) { %>
+                                <span> <%=inSaleProduct.discount %> % OFF</span>
+                            <% } %></p>
+                        </div>
+                        <div class="descriptionBox"><h4 class="description"> <%=inSaleProduct.model%> - <%=inSaleProduct.measures%> </h4>
+                            <a href="detalle-producto/<%=inSaleProduct.id%>"><div class="moreInfoBox"><h5>+ INFO</h5></a></div>
+                        </div>
+                    </div>             
+                </article>
+                <br>
+
+                <% }) %>
+
+            </div>
+
+        <br>
+        <div class="banner">
+            <img src="img/bannerDunlop.png" class="bannerDunlop" alt="bannerDunlop">
+        </div><br>
+
+    </main>
+
+    <footer>
+        <%- include ('partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

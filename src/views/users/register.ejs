@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+    <link href="css/styles-register.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/header') %>
+    </header>
+
+    <main>
+        <h3 class="forms-subTitle">Crear usuario</h3><br>
+        
+        <div class="forms">
+            <form action="/crear-usuario" method="POST" enctype="multipart/form-data">
+            
+            <div class="centrar">
+                <input type="text" name="name" id="name" minlength="2" class="inputText" placeholder=" Nombre" required>
+            
+            </div><br>
+            
+            <div class="centrar">
+                <input type="text" name="lastName" id="lastName" minlength="2"  size="40"  class="inputText" placeholder=" Apellido" required>
+            </div><br>
+
+            <div class="centrar">
+                <input type="email" name="email" id="email" minlength="2"  size="40"  class="inputText" placeholder=" E-Mail" required>
+            </div><br>
+            
+            <div class="centrar">
+                <input type="text" name="address" id="address"  class="inputText"  size="40" placeholder=" Dirección" required>
+            </div><br>
+
+            <div class="centrar">
+                <input type="text" name="city" id="city"  class="inputText"  size="40" placeholder=" Ciudad" required>
+            </div><br>
+
+            <div class="centrar">
+                <input type="text" name="country" id="country"  class="inputText"  size="40" placeholder=" País" required>
+            </div><br>
+
+            <div class="centrar">
+                <input type="text" name="postalcode" id="postalcode"  class="inputText"  size="40" placeholder=" Código postal" required>
+            </div><br>
+
+            <div class="centrar">
+                <input type="text" name="phone" id="phone"  class="inputText"  size="40" placeholder=" Telefono" required>
+            </div><br>
+            
+            <div class="centrar">
+                <input type="password" name="userPassword" id="userPassword" size="40"  placeholder=" Contraseña" class="inputText" required>
+            </div><br>
+            
+            <div class="centrar">
+                <input type="password" name="confirmPassword" id="confirmPassword"  size="40"  class="inputText" placeholder=" Confirmar contraseña" required>
+            </div><br>
+
+            <% if (errors == "") { %> 
+                <% }else{ %><%= errors %>
+                <% } %>
+            
+                <div class="buttonContainer">
+                    <input type="submit" class="formsButton" value="Crear usuario" onclick="return confirm('¿Estás seguro que deseas crear el usuario?');">       
+                </div> <br>
+                <div class="buttonContainer">
+                    <button type="reset" class="formsButton">Borrar</button>       
+                </div> 
+            </div><br><br>
+
+        </form>
+        </div><br>
+
+        <div class="banner">
+            <img src="img/banner-tires.jpeg" class="bannerDunlop" alt="bannerTires">
+        </div><br>
+
+    </main>
+
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>
