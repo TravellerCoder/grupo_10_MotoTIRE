@@ -27,7 +27,7 @@ Hombres y mujeres entre los 20 a los 50 años con alto interés de encontrar un 
 - https://www.unityroadmotorcycles.co.uk/tyres/
 
 ## Trello
-- https://trello.com/b/g0jlyF8C/mototire
+- https://trello.com/b/mUJ6IgGv/mototire
 
 ## Dashboard.render
 - https://grupo-10-mototire.onrender.com
