@@ -1,10 +1,11 @@
-module.exports= {
+module.exports ={
   "development": {
     "username": "root",
-    "password": "root",
-    "database": "mototire_db",
+    "password": 'root',
+    "database": "MotoTire_DB",
     "host": "127.0.0.1",
-    "dialect": "mysql"
+    "dialect": "mysql",
+    
   },
   "test": {
     "username": "root",

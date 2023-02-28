@@ -11,7 +11,7 @@ const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
 const controller = {
     index: (req,res) => {
-        const inSaleProducts = products.filter(product => product.category == 'in-sale');
+        const inSaleProducts = products.filter(product => products.category == 'in-sale');
         const userFinded = ""
         const viewData = {inSaleProducts, userFinded}
         /*if(userFinded){

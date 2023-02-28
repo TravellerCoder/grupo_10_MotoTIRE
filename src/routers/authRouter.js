@@ -4,7 +4,8 @@ const path = require('path');
 const router = express.Router();
 const fs = require('fs');
 const authController = require('../controllers/authController');
-
+const models= require('../database/models');
+const User = models.User;
 const multer = require('multer');
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
@@ -17,16 +18,26 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage:storage });
 const cpUpload = upload.fields([{ name: 'user_logo', maxCount: 1 }]);
-
+         // EXPRESS-VALIDATOR
 const {
     check,
     validationResult,
     body
-} = require('express-validator'); // EXPRESS-VALIDATOR
+} = require('express-validator');
 
-// CREAMOS LA CONSTANTE USERS PARA SU UTILIZACIÓN
+/**CREAMOS LA CONSTANTE USERS PARA SU UTILIZACIÓN
 const usersFilePath = path.resolve('./src/data/users.json');
-const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));*/
+
+
+// CREAMOS CONSTANTE CON ARRAY DE VALIDACIONES DE FORMULARIO DE REGISTER.EJS
+
+const validationRegisterForm = [
+    check('name').isLength({ min: 2}).withMessage('El nombre es muy corto.'),
+check('email').isEmail().withMessage('Ingrese un mail valido; ejemplo@ejemplo.com'),
+check('userPassword').isLength({ min: 8}).withMessage('La contraseña debe tener al menos 4 caracteres.'),
+check('confirmPassword').isLength({ min: 4}).withMessage('La contraseña debe tener al menos 4 caracteres.')
+]
 
 ////////////////////////////////////////
 
@@ -40,18 +51,6 @@ router.post('/login', [
 
 // Creación de usuario
 router.get('/registrarse', authController.renderRegister);
-router.post('/crear-usuario', [
-check('name').isLength({ min: 1}).withMessage('Todos los campos son obligatorios.'),
-check('lastName').isLength({ min: 1}).withMessage('Todos los campos son obligatorios.'),
-check('address').isLength({ min: 1}).withMessage('Todos los campos son obligatorios.'),
-check('city').isLength({ min: 1}).withMessage('Todos los campos son obligatorios.'),
-check('country').isLength({ min: 1}).withMessage('Todos los campos son obligatorios.'),
-check('email').isEmail().withMessage('Email invalido'),
-check('postalcode').isLength().withMessage('Codigo postal admite solo números.'),
-check('phone').isNumeric().withMessage('Telefono admite solo números.'),
-check('userPassword').isLength({ min: 4}).withMessage('La contraseña debe tener al menos 4 caracteres.'),
-check('confirmPassword').isLength({ min: 4}).withMessage('La contraseña debe tener al menos 4 caracteres.'),
-], cpUpload,
-authController.createUser);
+router.post('/crear-usuario', validationRegisterForm, cpUpload,authController.createUser);
 
 module.exports = router;

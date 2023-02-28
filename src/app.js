@@ -8,6 +8,7 @@ const methodOverride =  require('method-override'); // Pasar poder usar los mét
 const cookies = require('cookie-parser');
 const session = require('express-session');
 const acceso = require('./middlewares/access');
+const db = require('../src/database/models')
 
 app.use(session({
   secret: 'admin',

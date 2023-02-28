@@ -1,14 +1,17 @@
 const path = require('path');
 const fs = require('fs');
 const { create } = require('domain');
+const models = require('../database/models');
+const User = models.User;
+const sequelize = require('sequelize');
 
 // CREAMOS LA CONSTANTE PRODUCTS PARA SU UTILIZACIÓN
 const productsFilePath = path.resolve('./src/data/products.json');
 const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-// CREAMOS LA CONSTANTE USERS PARA SU UTILIZACIÓN
+/**  CREAMOS LA CONSTANTE USERS PARA SU UTILIZACIÓN
 const usersFilePath = path.resolve('./src/data/users.json');
-const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
+const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));*/
 
 // Express-validator
 const { validationResult } = require('express-validator');
@@ -20,9 +23,11 @@ let errors = "";
 let emailError = "";
 
 const renderRegister = (req, res) => {
-    errors = ""
-    const viewData = {errors: errors};
-    return res.render(path.resolve(__dirname, '..', 'views', 'users', 'register'), viewData);
+    User.findAll()
+        .then(function(User){
+            return res.render(path.resolve(__dirname, '..', 'views', 'users', 'register'), {User});
+        })
+    
 };
 
 const renderLogin = (req, res) => {
@@ -33,17 +38,18 @@ const renderLogin = (req, res) => {
 const createUser = (req, res) => {
 
         let err = validationResult(req);
+        res.send(err)
 
-        // VALIDACIONES - NO FUNCIONAN
-        /*if(!err.isEmpty()) {
+        // VALIDACIONES 
+        if(!err.isEmpty()) {
             errors = new Error(err.array().map(el => el['msg']).toString());
             const viewData = {errors}
             return res.render("users/register", viewData)
-        };*/
+        };
 
         // EL USUARIO(EMAIL) NO PUEDE ESTAR YA CREADO
         const reqEmail = req.body.email;
-        const compare = users.find(users => users.email == reqEmail)
+        const compare = users.findAll(users => users.email == reqEmail)
         if (compare != undefined){
             errors = "Ya existe un usuario con este email.";
             const viewData = {errors};

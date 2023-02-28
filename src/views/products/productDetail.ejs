@@ -17,18 +17,18 @@
         <div class="productDetailBox">
 
             <div class="productTitle">
-                <div class="product">Marca: <%=product.brand%></div>
-                <div class="product">Modelo: <%=product.model%></div>
-                <div class="product">Medidas: <%=product.measures%></div>
-                <p class="detail"><%=product.description%></p>
+                <div class="product">Marca: <%=products.brandId%></div>
+                <div class="product">Modelo: <%=products.model%></div>
+                <div class="product">Medidas: <%=products.measures%></div>
+                <p class="detail"><% for (let i = 0; i<products.description; i ++)%></p>
                 <div class="availability">
-                    <% if (product.availability >= 1) { %>
+                    <% if (products.availability >= 1) { %>
                         <p class="detail">Disponibilidad: Entrega inmediata</p> <img class="point" src="https://img.icons8.com/emoji/48/null/green-circle-emoji.png"/>
                     <% }else{ %>
                         <p class="detail">Disponibilidad: Sin stock</p> <img class="point" src="https://img.icons8.com/emoji/48/null/red-circle-emoji.png"/>
                     <% } %>
                 </div>
-                <div class="product">Precio: <%=product.price%>e</div>
+                <div class="product">Precio: <%=products.price%>e</div>
             </div><br>
 
             <div class="addCart">
@@ -36,20 +36,20 @@
             </div><br>
 
             <div class="addCart">
-                <b><a href="/modificar-producto/<%=product.id%>"><span class="addCartText">Modificar producto</span></b></a>
+                <b><a href="/modificar-producto/<%=products.id%>"><span class="addCartText">Modificar producto</span></b></a>
             </div><br>
 
             <div class="imgProduct">
-                <img src="/img/<%=product.img%>">
-                <% if (product.subImgs) { %>
-                <% for (let i= 0; i<product.subImgs.length; i++){ %>
-                    <img src="/img/<%=product.subImgs[i]%>">
+                <img src="/img/<%=products.img%>">
+                <% if (products.subImgs) { %>
+                <% for (let i= 0; i<products.subImgs.length; i++){ %>
+                    <img src="/img/<%=products.subImgs[i]%>">
                 <% } %>
                 <% } %>
             </div><br>
 
             <div class="productDetail">
-                <p class="detail detail2"><%=product.subDescription%></p>
+                <p class="detail detail2"><%=products.subDescription%></p>
 
             </div>
         </div>

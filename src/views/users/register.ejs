@@ -43,7 +43,7 @@
             </div><br>
 
             <div class="centrar">
-                <input type="text" name="postalcode" id="postalcode"  class="inputText"  size="40" placeholder=" Código postal" required>
+                <input type="text" name="postalCode" id="postalcode"  class="inputText"  size="40" placeholder=" Código postal" required>
             </div><br>
 
             <div class="centrar">
@@ -58,9 +58,6 @@
                 <input type="password" name="confirmPassword" id="confirmPassword"  size="40"  class="inputText" placeholder=" Confirmar contraseña" required>
             </div><br>
 
-            <% if (errors == "") { %> 
-                <% }else{ %><%= errors %>
-                <% } %>
             
                 <div class="buttonContainer">
                     <input type="submit" class="formsButton" value="Crear usuario" onclick="return confirm('¿Estás seguro que deseas crear el usuario?');">       
