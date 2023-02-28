@@ -40,12 +40,13 @@ const productsController = {
     renderCreateProduct: function (req, res)  {
         Product.findAll()
             .then(function(products){
-                return res.render(path.resolve(__dirname, '..', 'views', 'products', 'createProduct'), {products})
+                return res.render( path.resolve('src/views/products/createProduct'), {products})
             }) 
         
     },
 
     storeProduct:function (req, res) {
+        console.log(req.body)
         Product.create(
             {
                 brand: req.body.brand,
@@ -61,8 +62,9 @@ const productsController = {
                 subImg: req.body.subImg,
         })
             .then(function(products){
-        return res.render(path.resolve(__dirname, '..', 'views', 'products', 'productDetail'),{products});
-            })
+        return res.render('products/productDetail',{products});
+        
+            }).catch(()=>console.log('hola'))
     }, 
     renderAdminProduct: (req, res) => {
         return res.render(path.resolve(__dirname, '..', 'views', 'products', 'adminProduct'),{products});

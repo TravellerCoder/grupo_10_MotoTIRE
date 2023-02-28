@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement : true,
             
         },
-        brand:{
+        brandId:{
             type: DataTypes.STRING,
             
             allowNull : false,
@@ -37,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         category: {
             type : DataTypes.STRING,
-            primaryKey: true,
+            
             allowNull : false
         },
         description : {
@@ -73,18 +73,15 @@ module.exports = (sequelize, DataTypes) => {
     
     Product.associate = function(models) {
         Product.belongsTo(models.Brand, {
-            foreingKey : "brand_id",
-            as : "brands",
+            foreingKey : "brandId",
+            as : "brand",
             
         })
-    
-    },
-    Product.associate = function(models) {
-        Product.belongsTo(models.Category, {
+       /**  Product.belongsTo(models.Category, {
             foreingKey : "category_id",
             as : "categories",
             
-        })
+        })*/
     }
     return Product;
 }

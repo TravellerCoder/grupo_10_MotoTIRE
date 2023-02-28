@@ -3,7 +3,7 @@ const Product = require('./Product')
 module.exports = function (sequelize, DataTypes) {
     let alias = 'Brand'
     let cols = {
-        brand_id:{
+        id:{
             type : DataTypes.INTEGER,
             primaryKey : true,
             autoIncrement : true,
@@ -22,7 +22,7 @@ module.exports = function (sequelize, DataTypes) {
     
     Brand.associate=function(models){
         Brand.hasMany(models.Product, {
-            foreingKey : "brand_id",
+            foreingKey : "brandId",
             as : "products",
             
         })

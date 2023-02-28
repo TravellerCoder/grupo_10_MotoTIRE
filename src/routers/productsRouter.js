@@ -40,7 +40,7 @@ router.get('/lista-productos', productsController.renderShowProducts);
 
 // Creación de producto
 router.get('/crear-producto', productsController.renderCreateProduct);
-router.post('/guardar-producto', productsController.storeProduct);
+router.post('/guardar-producto',cpUpload, productsController.storeProduct);
 
 //Edición de producto
 router.get('/modificar-producto/:id', productsController.renderEditProduct);
