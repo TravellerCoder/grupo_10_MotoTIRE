@@ -50,9 +50,9 @@
                 </div>
                 <div class="artTitle">
                     <h3>Categoria: </h3><br>
-                        <input type="radio" id="category" name="category_id" value="in-sale" placeholder="in-sale">
+                        <input type="radio" id="category" name="category" value="true" placeholder="in-sale">
                         <label for="in-sale">En oferta</label><br>
-                        <input type="radio" id="category" name="category_id" value="none" placeholder="none">
+                        <input type="radio" id="category" name="category" value="false" placeholder="none">
                         <label for="none">Sin oferta</label><br>
                 </div>
                 
@@ -72,10 +72,7 @@
                     <input type="file" accept=".jpg, .png, .jpeg" name="img" id="img" required>
                 </div><br>
         
-                <div class="photoBox">
-                    <label for="subImgs"><b>Fotos del producto (2Max): </label></b><br>
-                    <input type="file" accept=".jpg, .png, .jpeg" name="subImg" id="subImgs" required multiple>
-                </div><br>
+            
         
                 <div class="artButtonBox">
                     <input type="submit" class="artButton" value="Crear producto" onclick="return confirm('¿Estás seguro que deseas crear este producto?');">

@@ -1,6 +1,3 @@
-const Category = require('./Category');
-const Brand = require ('./Brand');
-
 module.exports = (sequelize, DataTypes) => {
     let alias = 'Product'
     let cols = {
@@ -10,7 +7,7 @@ module.exports = (sequelize, DataTypes) => {
             autoIncrement : true,
             
         },
-        brandId:{
+        brand:{
             type: DataTypes.STRING,
             
             allowNull : false,
@@ -36,7 +33,7 @@ module.exports = (sequelize, DataTypes) => {
             allowNull : false,
         },
         category: {
-            type : DataTypes.STRING,
+            type: DataTypes.BOOLEAN,
             
             allowNull : false
         },
@@ -70,19 +67,10 @@ module.exports = (sequelize, DataTypes) => {
 
     const Product = sequelize.define(alias, cols, config);
     
-    
-    Product.associate = function(models) {
-        Product.belongsTo(models.Brand, {
-            foreingKey : "brandId",
-            as : "brand",
-            
-        })
-       /**  Product.belongsTo(models.Category, {
-            foreingKey : "category_id",
-            as : "categories",
-            
-        })*/
-    }
+
     return Product;
 }
+
+
+
 

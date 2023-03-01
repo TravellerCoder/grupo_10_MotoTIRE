@@ -25,58 +25,19 @@ let emailError = "";
 const renderRegister = (req, res) => {
     User.findAll()
         .then(function(User){
-            return res.render(path.resolve(__dirname, '..', 'views', 'users', 'register'), {User});
+            return res.render(path.resolve ('src/views/users/register'), {User});
         })
     
 };
 
 const renderLogin = (req, res) => {
     const viewData = {errors}
-    return res.render(path.resolve(__dirname, '..', 'views', 'users', 'login'), viewData);
+    return res.render(path.resolve('src/views/users/login'), viewData);
 };
 
-const createUser = (req, res) => {
+const createUser = (req, res) => 
 
-        let err = validationResult(req);
-        res.send(err)
-
-        // VALIDACIONES 
-        if(!err.isEmpty()) {
-            errors = new Error(err.array().map(el => el['msg']).toString());
-            const viewData = {errors}
-            return res.render("users/register", viewData)
-        };
-
-        // EL USUARIO(EMAIL) NO PUEDE ESTAR YA CREADO
-        const reqEmail = req.body.email;
-        const compare = users.findAll(users => users.email == reqEmail)
-        if (compare != undefined){
-            errors = "Ya existe un usuario con este email.";
-            const viewData = {errors};
-            return res.render(path.resolve(__dirname, '..', 'views', 'users', 'register'), viewData)
-        }
-
-        // LAS CONTRASEÑAS DEBEN SER IGUALES
-        if(req.body.userPassword != req.body.confirmPassword){
-        errors = "Las contraseñas no coinciden.";
-        const viewData = {errors};
-        return res.render(path.resolve(__dirname, '..', 'views', 'users', 'register'), viewData)
-        }
-
-        // SE CARGA EL NUEVO USUARIO
-        const newUser = req.body;
-        newUser.id = users.length + 1
-        newUser.id = String(newUser.id);
-        const password = req.body.userPassword;
-        const passwordHash = bcrypt.hashSync(password, 4);
-        newUser.userPassword = passwordHash;
-        newUser.confirmPassword = passwordHash;
-        newUser.role = "user";
-        users.push(newUser)
-        fs.writeFileSync(usersFilePath, JSON.stringify(users, null, 2));
-        const viewData = {user: newUser};
-        return res.render(path.resolve(__dirname, '..', 'views', 'users', 'user'), viewData);
-}
+    User
 
 const login = (req,res) => {
     const loginEmail = req.body.loginEmail;

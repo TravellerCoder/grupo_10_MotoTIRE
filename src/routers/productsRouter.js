@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage:storage });
-const cpUpload = upload.fields([{ name: 'img', maxCount: 1 }, { name: 'subImg', maxCount: 2 }]);
+//const cpUpload = upload.fields([{ name: 'img', maxCount: 1 }, { name: 'subImg', maxCount: 2 }]);
 
 // Express-validator
 const { validationResult  } = require('express-validator');
@@ -40,11 +40,11 @@ router.get('/lista-productos', productsController.renderShowProducts);
 
 // Creación de producto
 router.get('/crear-producto', productsController.renderCreateProduct);
-router.post('/guardar-producto',cpUpload, productsController.storeProduct);
+router.post('/guardar-producto',upload.single('img'), productsController.storeProduct);
 
 //Edición de producto
 router.get('/modificar-producto/:id', productsController.renderEditProduct);
-router.put('/modificar-producto/:id',validationCreateProductForm, cpUpload, productsController.updateProduct);
+router.put('/modificar-producto/:id',upload.single('img'), productsController.updateProduct);
 
 // Eliminar producto
 router.get('/eliminar-producto/:id', productsController.renderDeleteForm)
