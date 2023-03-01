@@ -6,8 +6,8 @@ const fs = require('fs');
 const authController = require('../controllers/authController');
 const models= require('../database/models');
 const User = models.User;
-const multer = require('multer');
-const storage = multer.diskStorage({
+//const multer = require('multer');
+/**const storage = multer.diskStorage({
     destination: function(req, file, cb){
         cb(null, path.resolve('public/img'))
     },
@@ -15,9 +15,8 @@ const storage = multer.diskStorage({
         const uniqueSuffix = Date.now();
         cb(null, uniqueSuffix + '-' + file.originalname)
     }
-});
-const upload = multer({ storage:storage });
-const cpUpload = upload.fields([{ name: 'user_logo', maxCount: 1 }]);
+});*/
+
          // EXPRESS-VALIDATOR
 const {
     check,
@@ -51,6 +50,6 @@ router.post('/login', [
 
 // Creación de usuario
 router.get('/registrarse', authController.renderRegister);
-router.post('/crear-usuario', validationRegisterForm, cpUpload,authController.createUser);
+router.post('/crear-usuario', authController.createUser);
 
 module.exports = router;

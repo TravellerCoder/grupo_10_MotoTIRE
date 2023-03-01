@@ -3,18 +3,18 @@ const fs = require('fs');
 const { create } = require('domain');
 const models = require('../database/models');
 const User = models.User;
-const sequelize = require('sequelize');
+const { Op } = require('sequelize');
 
-// CREAMOS LA CONSTANTE PRODUCTS PARA SU UTILIZACIÓN
+/**  CREAMOS LA CONSTANTE PRODUCTS PARA SU UTILIZACIÓN
 const productsFilePath = path.resolve('./src/data/products.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
+const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));*/
 
 /**  CREAMOS LA CONSTANTE USERS PARA SU UTILIZACIÓN
 const usersFilePath = path.resolve('./src/data/users.json');
 const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));*/
 
 // Express-validator
-const { validationResult } = require('express-validator');
+//const { validationResult } = require('express-validator');
 
 // BCRYPT para hashear contraseñas
 const bcrypt = require('bcrypt');
@@ -22,24 +22,45 @@ const bcrypt = require('bcrypt');
 let errors = "";
 let emailError = "";
 
-const renderRegister = (req, res) => {
+const authController = {
+
+renderRegister : (req, res) => {
     User.findAll()
         .then(function(User){
             return res.render(path.resolve ('src/views/users/register'), {User});
         })
     
-};
+},
 
-const renderLogin = (req, res) => {
+renderLogin : (req, res) => {
     const viewData = {errors}
     return res.render(path.resolve('src/views/users/login'), viewData);
-};
+},
 
-const createUser = (req, res) => 
+createUser : async (req, res) => {
+    const usersData = {
+        name: req.body.name,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        adress: req.body.adress,
+        city: req.body.city,
+        country: req.body.country,
+        postalCode: req.body.postalCode,
+        phone: req.body.phone,
+        userPassword: req.body.userPassword,
+        confirmPassword: req.body.confirmPassword
+    }
+    
+    console.log(usersData)
+    User.create(usersData)
+        .then(user => {
+            res.redirect('/');})
+            .catch(error => res.send(error))
+            console.log(req.body)
+    //console.log(re)
+},
 
-    User
-
-const login = (req,res) => {
+login : (req,res) => {
     const loginEmail = req.body.loginEmail;
     const loginPassword = req.body.loginPassword;
     
@@ -80,7 +101,7 @@ const login = (req,res) => {
     }
 
         // MOSTRAR ERRORES DE FORMULARIO SI LOS HAY
-    err = validationResult(req);
+    let err = validationResult(req);
     if(!err.isEmpty()) {
         const errors = new Error(err.array().map(el => el['msg']).toString());
         const viewData = {errors}
@@ -103,6 +124,7 @@ const login = (req,res) => {
         return res.render(path.resolve(__dirname, '..', 'views', 'users', 'login'), viewData);
     };
 
-};
+}
+}
 
-module.exports = {renderRegister, renderLogin, createUser, login};
+module.exports = authController;

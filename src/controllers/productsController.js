@@ -45,8 +45,7 @@ const productsController = {
     },
 
     storeProduct:async (req, res) =>{
-
-
+        
         const data = {
             brand: req.body.brand,
             model: req.body.model,

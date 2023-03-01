@@ -1,10 +1,7 @@
-const { DataTypes, Association } = require("sequelize");
-const models = require(".");
-
 module.exports = (sequelize, DataTypes) => {
-    let alias = "User"
+    let alias = "User";
     let cols  = {
-        user_id:{
+        id:{
             type : DataTypes.INTEGER,
             primaryKey : true,
             autoIncrement : true,
@@ -20,7 +17,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         email :{
             type : DataTypes.STRING,
-            allowNull : false
+            allowNull : false,
+            primaryKey: true,
         },
         adress : {
             type : DataTypes.STRING,
@@ -33,10 +31,10 @@ module.exports = (sequelize, DataTypes) => {
             type :DataTypes.STRING
         },
         postalCode : {
-            type : DataTypes.FLOAT,
+            type : DataTypes.STRING,
         },
         phone : {
-            type : DataTypes.INTEGER
+            type : DataTypes.STRING
         }, 
         userPassword : {
             type : DataTypes.STRING,
@@ -53,5 +51,7 @@ module.exports = (sequelize, DataTypes) => {
     }
 
     const User = sequelize.define(alias, cols, config);
-    return User
+    
+    return User;
+
 }
