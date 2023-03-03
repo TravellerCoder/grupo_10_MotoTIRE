@@ -3,7 +3,7 @@
 
 <head>
     <%- include ('../partials/head') %>
-    <link href="css/styles-register.css" rel="stylesheet">
+        <link href="css/styles-register.css" rel="stylesheet">
 </head>
 
 <body>
@@ -14,58 +14,71 @@
     <main>
         <h3 class="forms-subTitle">Crear usuario</h3><br>
         
+            
+                
+        
+
         <div class="forms">
-            <form action='/crear-usuario' method="POST" enctype="multipart/form-data">
-            
-            <div class="centrar">
-                <input type="text" name="name" id="name" minlength="2" class="inputText" placeholder=" Nombre" required>
-            
-            </div><br>
-            
-            <div class="centrar">
-                <input type="text" name="lastName" id="lastName" minlength="2"  size="40"  class="inputText" placeholder=" Apellido" required>
-            </div><br>
+            <form action='/guardar-usuario' method="POST">
 
-            <div class="centrar">
-                <input type="email" name="email" id="email" minlength="2"  size="40"  class="inputText" placeholder=" E-Mail" required>
-            </div><br>
-            
-            <div class="centrar">
-                <input type="text" name="adress" id="address"  class="inputText"  size="40" placeholder=" Dirección" required>
-            </div><br>
+                <div class="centrar">
+                    <input type="text" name="name" id="name" class="inputText" placeholder=" Nombre">
+                
 
-            <div class="centrar">
-                <input type="text" name="city" id="city"  class="inputText"  size="40" placeholder=" Ciudad" required>
-            </div><br>
+                </div><br>
 
-            <div class="centrar">
-                <input type="text" name="country" id="country"  class="inputText"  size="40" placeholder=" País" required>
-            </div><br>
+                <div class="centrar">
+                    <input type="text" name="lastName" id="lastName"  size="40" class="inputText"
+                        placeholder=" Apellido">
+                </div><br>
 
-            <div class="centrar">
-                <input type="text" name="postalCode" id="postalcode"  class="inputText"  size="40" placeholder=" Código postal" required>
-            </div><br>
+                <div class="centrar">
+                    <input type="email" name="email" id="email"  size="40" class="inputText"
+                        placeholder=" E-Mail">
+                </div><br>
 
-            <div class="centrar">
-                <input type="text" name="phone" id="phone"  class="inputText"  size="40" placeholder=" Telefono" required>
-            </div><br>
-            
-            <div class="centrar">
-                <input type="password" name="userPassword" id="userPassword" size="40"  placeholder=" Contraseña" class="inputText" required>
-            </div><br>
-            
-            <div class="centrar">
-                <input type="password" name="confirmPassword" id="confirmPassword"  size="40"  class="inputText" placeholder=" Confirmar contraseña" required>
-            </div><br>
+                <div class="centrar">
+                    <input type="text" name="adress" id="address" class="inputText" size="40" placeholder=" Dirección">
+                        
+                </div><br>
 
-            
+                <div class="centrar">
+                    <input type="text" name="city" id="city" class="inputText" size="40" placeholder=" Ciudad" >
+                </div><br>
+
+                <div class="centrar">
+                    <input type="text" name="country" id="country" class="inputText" size="40" placeholder=" País"
+                        >
+                </div><br>
+
+                <div class="centrar">
+                    <input type="text" name="postalCode" id="postalcode" class="inputText" size="40"
+                        placeholder=" Código postal" >
+                </div><br>
+
+                <div class="centrar">
+                    <input type="text" name="phone" id="phone" class="inputText" size="40" placeholder=" Telefono"
+                        >
+                </div><br>
+
+                <div class="centrar">
+                    <input type="password" name="userPassword" id="userPassword" size="40" placeholder=" Contraseña"
+                        class="inputText" >
+                </div><br>
+
+                <div class="centrar">
+                    <input type="password" name="confirmPassword" id="confirmPassword" size="40" class="inputText"
+                        placeholder=" Confirmar contraseña" >
+                </div><br>
+
+
                 <div class="buttonContainer">
-                    <input type="submit" class="formsButton" value="Crear usuario" >       
+                    <input type="submit" class="formsButton" value="Crear usuario">
                 </div> <br>
                 <div class="buttonContainer">
-                    <button type="reset" class="formsButton">Borrar</button>       
-                </div> 
-            </div><br><br>
+                    <button type="reset" class="formsButton">Borrar</button>
+                </div>
+        </div><br><br>
 
         </form>
         </div><br>

@@ -70,7 +70,7 @@ CREATE TABLE `users` (
   `phone` varchar(45) NOT NULL,
   `userPassword` mediumtext NOT NULL,
   `confirmPassword` mediumtext NOT NULL,
-  PRIMARY KEY (`user_id`,`email`)
+  PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
