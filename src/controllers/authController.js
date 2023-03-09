@@ -17,52 +17,122 @@ const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));*/
 const { validationResult } = require('express-validator');
 
 // BCRYPT para hashear contraseñas
-//const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
-//let errors = "";
-//let emailError = "";
+const guestMidleware = require('../middlewares/guestMiddleware')
+
+
+
 
 const authController = {
 
-    ////////////////Ingreso al formulario de registro/////////////////////////
+
     renderRegister: (req, res) => {
         res.render(path.resolve('src/views/users/register'));
     },
-///////////////////Ingreso al formulario de logIn/////////////////////////////
+
     renderLogin: (req, res) => {
+        
         res.render(path.resolve('src/views/users/login'));
     },
-//////////////////Creacion de usuario//////////////////////
-    createUser: async (req, res) => {
-        const errors = validationResult(req);
-                res.send(errors)
-        if (!errors.isEmpty()) {
-            const usersData = {
-                name: req.body.name,
-                lastName: req.body.lastName,
-                email: req.body.email,
-                adress: req.body.adress,
-                city: req.body.city,
-                country: req.body.country,
-                postalCode: req.body.postalCode,
-                phone: req.body.phone,
-                userPassword: req.body.userPassword,
-                confirmPassword: req.body.confirmPassword
-            }
-//console.log(usersData) // Lo usamos por si el body del formulario arroja algun error.
-            User.create(usersData)
-                .then(user => {
-                    res.redirect('/ingresar');
-                })
-                .catch(errors => res.send(errors)) 
-            } else {
-                res.redirect('/crear-usuario',{errors : errors.err()})
-            }
-    },
-//////////////// proceso de logeo de usuario registrado///////////////////////
-        login: (req, res) => {
-            res.render(path.resolve('src/views/index'))
-        }
-    }
 
-module.exports = authController;
+    createUser: async (req, res) => {
+        const validationErrors = validationResult(req);
+        /////////////////////////////Revision de errores en el formulario de registro
+        if (validationErrors.errors.length > 0) {
+            return res.render(path.resolve('src/views/users/register'), {
+                errors: validationErrors.mapped(),
+                oldData: req.body
+            })
+        }
+        /////////////////////////////Busqueda de email registrado en base de datos
+        let userInDataBase = await User.findOne({
+            where: { email: req.body.email },
+        });
+        if (userInDataBase) {
+            return res.render(path.resolve('src/views/users/register'), {
+                errors: {
+                    email: {
+                        msg: 'Este Email ya esta registrado'
+                    }
+                },
+                oldData: req.body
+            })
+        }
+
+
+        let userToCreate = {
+            ...req.body,
+            userPassword: bcrypt.hashSync(req.body.userPassword, 10),
+            confirmPassword: bcrypt.hashSync(req.body.confirmPassword, 10)
+        };
+        /////////////////////////////Creacion de usuario
+
+        const usersData = {
+            name: req.body.name,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            adress: req.body.adress,
+            city: req.body.city,
+            country: req.body.country,
+            postalCode: req.body.postalCode,
+            phone: req.body.phone,
+            userPassword: bcrypt.hashSync(req.body.userPassword, 10),
+            confirmPassword: bcrypt.hashSync(req.body.confirmPassword, 10)
+        }
+
+        console.log(userToCreate)
+        let userCreated = User.create(usersData)
+            .then(user => {
+                res.redirect('/ingresar');
+            })
+    },
+
+
+
+    loginProcess: async (req, res) => {
+        let userToLogIn = await User.findOne({
+            where: { email: req.body.loginEmail }
+        });
+        if (userToLogIn) {
+            if (userToLogIn) {
+                const passwordYes = bcrypt.compareSync(req.body.loginPassword, userToLogIn.userPassword);
+                if (passwordYes) {
+                    delete userToLogIn.userPassword;
+                    delete userToLogIn.userconfirmPassword;
+                    req.session.userLogged = userToLogIn
+                    
+                    /**if (req.body.rememberMe) {
+                        res.cookie("userEmail", req.body.userEmail, { maxAge: 1000 * 60 * 10 });
+                    }*/
+                    
+                    
+                    return res.redirect('/perfil')
+
+                }
+            }
+            return res.render(path.resolve('src/views/users/login'), {
+                errors: {
+                    loginEmail: {
+                        msg: 'Los datos ingresados son incorrectos'
+                    }
+                },
+                oldData: req.body
+            })
+        }
+    },
+
+    userProfile: (req, res) => {
+        return res.render(path.resolve('src/views/users/user'),{
+            userin : req.session.userLogged
+        })
+    },
+
+    logOut: (req, res) => {
+        req.session.destroy();
+        console.log(req.session);
+        return res.redirect('/')
+    }
+}
+
+module.exports = authController

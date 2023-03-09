@@ -7,17 +7,11 @@ const { Op }= require('sequelize');
 
 
 
-   //CREAMOS LA CONSTANTE PRODUCTS PARA SU UTILIZACIÓN
-//const productsFilePath = path.resolve('./src/data/products.json');
-//const productos = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));
 
-//  CREAMOS LA CONSTANTE USERS PARA SU UTILIZACIÓN
-//const usersFilePath = path.resolve('./src/data/users.json');
-//const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));
 
 // Express-validator
-/**const {body, validationResult  } = require('express-validator');
-const { Association } = require('sequelize');*/
+const {body, validationResult  } = require('express-validator');
+
 
 
 
@@ -25,7 +19,7 @@ const { Association } = require('sequelize');*/
 const productsController = {
 
     renderProductsCart: (req, res) => {
-        return res.render(path.resolve(__dirname, '..', 'views', 'products', 'productCart'), {productos:productos});
+        return res.render(path.resolve('src/views/products/productCart'));
     },
 
     renderProductsDetail: (req,res) => {
@@ -66,13 +60,13 @@ const productsController = {
                 .catch(error => res.send(error))
     }, 
     renderAdminProduct: (req, res) => {
-        return res.render(path.resolve(__dirname, '..', 'views', 'products', 'adminProduct'),{products});
+        return res.render(path.resolve('src/views/products/adminProduct'),{products});
     }, 
 
     renderShowProducts: (req, res) => {
-        Product.findAll(products)
+        Product.findAll()
         .then(function(products){
-            return res.render(path.resolve(__dirname, '..', 'views', 'products', 'showProducts'), {products:products})
+            return res.render(path.resolve('src/views/products/showProducts'), {products})
         })
     },
     renderEditProduct: (req, res) => {

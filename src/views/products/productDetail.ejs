@@ -20,7 +20,7 @@
                 <div class="product">Marca: <%=products.brand%></div>
                 <div class="product">Modelo: <%=products.model%></div>
                 <div class="product">Medidas: <%=products.measures%></div>
-                <p class="detail"><% for (let i = 0; i<products.description; i ++)%></p>
+                <div class="product"><%=products.description%></div>
                 <div class="availability">
                     <% if (products.availability >= 1) { %>
                         <p class="detail">Disponibilidad: Entrega inmediata</p> <img class="point" src="https://img.icons8.com/emoji/48/null/green-circle-emoji.png"/>

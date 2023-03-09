@@ -19,13 +19,25 @@ const storage = multer.diskStorage({
 const upload = multer({ storage:storage });
 //const cpUpload = upload.fields([{ name: 'img', maxCount: 1 }, { name: 'subImg', maxCount: 2 }]);
 
-// Express-validator
-const { validationResult  } = require('express-validator');
+
 
 // CREAMOS VALIDACIONES DE CAMPOS DEL FOMULARIO DE CREACION/MODIFICACION DE PRODUCTO
 const validationCreateProductForm = [
     body('brand').isLength({min:2}).withMessage('El nombre de la marca es muy corto'),
-    body('description').isLength({min:20}).withMessage('Una descripcion completa ayuda a vender tu producto mas rapido!')
+    body('description').isLength({min:20}).withMessage('Una descripcion completa ayuda a vender tu producto mas rapido!'),
+    body('img').custom((value, {req})=>{
+        let file = req.file;
+        let acceptedExtensions = ['.jpg', '.png', '.jepg', '.gif'];
+
+        if (!file){
+            throw new Error('Tenes que subir una imagen del producto')
+        } else {
+            let fileExtension = path.extname(file.originalname);
+            if (!acceptedExtensions.includes(fileExtension)) {
+                throw new Error('Las imagenes tienen que ser en formato .jpg, .png, .jepg, .gif' )
+            }
+        }
+    })
 ]
 
 ////////////////////////////////////////////

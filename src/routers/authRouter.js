@@ -20,28 +20,45 @@ const storage = multer.diskStorage({
 
 // EXPRESS-VALIDATOR
 const { body } = require('express-validator');
+const guestMidleware = require('../middlewares/guestMiddleware');
+const authMidleware = require('../middlewares/authMidleware');
 
 // CREAMOS CONSTANTE CON ARRAY DE VALIDACIONES DE FORMULARIO DE REGISTER.EJS
 
 const validationRegisterForm = [
-    body('name').isLength({ min: 2 }).withMessage('El nombre es muy corto.'),
-    body('email').isEmail().withMessage('Ingrese un mail valido; ejemplo@ejemplo.com'),
-    body('userPassword').isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres.'),
-    body('confirmPassword').isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres.')
+    body('name').notEmpty().withMessage('El campo nombre es obligatorio').bail()
+                .isLength({min: 2 }).withMessage('El nombre es muy corto.'),
+    body('email').notEmpty().withMessage('El campo email es obligatorio').bail()
+                .isEmail().withMessage('Ingrese un mail valido; ejemplo@ejemplo.com'),
+    body('userPassword').notEmpty().isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.'),
+    body('confirmPassword').notEmpty().isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.')
 ]
 
-/////////////////ROUTERS///////////////////////
+const validationsLogIn = [
+    body('loginEmail').notEmpty().withMessage('Ingresa el mail').bail()
+                        .isEmail().withMessage('Email invalido'),
+    body('loginPassword').notEmpty().withMessage('Tenes que ingresar tu contraseña.')
+    
+]
 
+
+/////////////////ROUTERS///////////////////////
+// Creación de usuario
+router.get('/registrarse',guestMidleware, authController.renderRegister);
+router.post('/guardar-usuario', validationRegisterForm, authController.createUser);
 
 // Login de usuario
-router.get('/ingresar', authController.renderLogin);
-router.post('/login', [
-    body('loginEmail').isEmail().withMessage('Email invalido'),
-    body('loginPassword').isLength({ min: 4 }).withMessage('La contraseña debe tener al menos 4 caracteres.'),
-], authController.login);
+router.get('/ingresar',guestMidleware, authController.renderLogin);
+router.post('/login', validationsLogIn, authController.loginProcess);
 
-// Creación de usuario
-router.get('/registrarse', authController.renderRegister);
+//Perfil del usuario
+router.get('/perfil', authMidleware, authController.userProfile);
+
+//Modificacion de usuario
+router.get('/modificar-usuario',guestMidleware, authController.renderRegister);
 router.post('/guardar-usuario', validationRegisterForm, authController.createUser);
+
+//Log out del usuario
+router.get('/salir', authController.logOut)
 
 module.exports = router;

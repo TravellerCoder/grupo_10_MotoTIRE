@@ -9,12 +9,13 @@ const cookies = require('cookie-parser');
 const session = require('express-session');
 const acceso = require('./middlewares/access');
 const db = require('../src/database/models')
+const userLoggedMidleware = require('../src/middlewares/userLoggedMidleware')
 
 app.use(session({
   secret: 'admin',
-  resave: true,
-  saveUninitialized: true,
-  cookie: { secure: false }
+  resave: false,
+  saveUninitialized: false,
+  
 }));
 
 app.use(acceso);
@@ -22,7 +23,7 @@ app.use(methodOverride("_method"))
 app.use(express.urlencoded({extended: false})); //Para poder trabajar con los datos del JSON
 app.use(express.json())
 app.use(cookies());
-
+app.use(userLoggedMidleware)
 app.use(express.static('public')); // Carpeta publica 'public'
 
 /* CONFIGURACION VIEW ENGINE A EJS */

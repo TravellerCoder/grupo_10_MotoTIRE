@@ -12,21 +12,32 @@
     </header>
 
     <main>
-
+        
         <h3 class="forms-subTitle">Ingresar</h3>
 
         <div class="forms">
             <form action="/login" method="POST">
 
                 <div>
-                    <input type="text" name="loginEmail" id="loginEmail" minlength="2" size="40" class="inputText"
-                        placeholder="Email" required>
+                    <input type="text" name="loginEmail" id="loginEmail" size="40" class="inputText" placeholder="Email"
+                    value="<%= locals.oldData ? oldData.loginEmail : null%>" 
+                    >
+                    <% if (locals.errors && errors.loginEmail) { %>
+                        <div class="errorMsg">
+                            <%= errors.loginEmail.msg %>
+                        </div>
+                        <% } %> 
 
                 </div><br>
 
                 <div>
-                    <input type="password" name="loginPassword" id="loginPassword" size="40" class="inputText"
-                        placeholder="Contraseña" required>
+                    <input type="password" name="loginPassword" id="loginPassword" size="40" class="inputText" placeholder="Contraseña">
+                    <% if (locals.errors && errors.loginPassword) { %>
+                        <div class="errorMsg">
+                            <%= errors.loginPassword.msg %>
+                        </div>
+                        <% } %> 
+
                 </div><br>
 
                 <div>

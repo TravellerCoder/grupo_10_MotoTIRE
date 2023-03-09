@@ -13,80 +13,105 @@
 
     <main>
         <h3 class="forms-subTitle">Crear usuario</h3><br>
-        
-            
-                
-        
 
         <div class="forms">
+
             <form action='/guardar-usuario' method="POST">
 
-                <div class="centrar">
-                    <input type="text" name="name" id="name" class="inputText" placeholder=" Nombre">
-                
+                                <div class="centrar">
+                                    <input type="text" name="name" id="name" class="inputText" placeholder=" Nombre" 
+                                    value="<%= locals.oldData ? oldData.name : null%>" 
+                                    >
+                                    <% if (locals.errors && errors.name) { %>
+                                        <div class="errorMsg">
+                                            <%= errors.name.msg %>
+                                        </div>
+                                        <% } %>
+                                </div><br>
+                                <div class="centrar">
+                                    <input type="text" name="lastName" id="lastName" size="40" class="inputText" placeholder=" Apellido"
+                                    value="<%= locals.oldData ? oldData.lastName : null%>" 
+                                    >
+                                    </div><br>
+                                        
+                                    
 
-                </div><br>
+                                <div class="centrar">
+                                    <input type="email" name="email" id="email" size="40" class="inputText" placeholder=" E-Mail"
+                                    value="<%= locals.oldData ? oldData.email : null%>" 
+                                    >
+                                    <% if (locals.errors && errors.email) { %>
+                                        <div class="errorMsg">
+                                            <%= errors.email.msg %>
+                                        </div>
+                                        <% } %>
+                                    </div><br>
 
-                <div class="centrar">
-                    <input type="text" name="lastName" id="lastName"  size="40" class="inputText"
-                        placeholder=" Apellido">
-                </div><br>
+                                <div class="centrar">
+                                    <input type="text" name="adress" id="address" class="inputText" size="40" placeholder=" Dirección"
+                                    value="<%= locals.oldData ? oldData.adress : null%>" 
+                                    >
+                                    
+                                    </div><br>
 
-                <div class="centrar">
-                    <input type="email" name="email" id="email"  size="40" class="inputText"
-                        placeholder=" E-Mail">
-                </div><br>
+                                <div class="centrar">
+                                    <input type="text" name="city" id="city" class="inputText" size="40" placeholder=" Ciudad"
+                                    value="<%= locals.oldData ? oldData.city : null%>" 
+                                    >
+                                    
+                                    </div><br>
 
-                <div class="centrar">
-                    <input type="text" name="adress" id="address" class="inputText" size="40" placeholder=" Dirección">
-                        
-                </div><br>
+                                <div class="centrar">
+                                    <input type="text" name="country" id="country" class="inputText" size="40" placeholder=" País"
+                                    value="<%= locals.oldData ? oldData.country : null%>" 
+                                    >
+                                    
+                                    </div><br>
 
-                <div class="centrar">
-                    <input type="text" name="city" id="city" class="inputText" size="40" placeholder=" Ciudad" >
-                </div><br>
+                                    <div class="centrar">
+                                        <input type="text" name="postalCode" id="postalcode" class="inputText" size="40" placeholder=" Código postal"
+                                        value="<%= locals.oldData ? oldData.postalCode : null%>" 
+                                        >
+                                        
+                                    </div><br>
 
-                <div class="centrar">
-                    <input type="text" name="country" id="country" class="inputText" size="40" placeholder=" País"
-                        >
-                </div><br>
+                                    <div class="centrar">
+                                        <input type="text" name="phone" id="phone" class="inputText" size="40" placeholder=" Telefono"
+                                        value="<%= locals.oldData ? oldData.phone : null%>" 
+                                        >
+                                        
+                                    </div><br>
 
-                <div class="centrar">
-                    <input type="text" name="postalCode" id="postalcode" class="inputText" size="40"
-                        placeholder=" Código postal" >
-                </div><br>
+                                    <div class="centrar">
+                                        <input type="password" name="userPassword" id="userPassword" size="40" placeholder=" Contraseña" class="inputText">
+                                        <% if (locals.errors && errors.userPassword) { %>
+                                            <div class="errorMsg">
+                                                <%= errors.userPassword.msg %>
+                                            </div>
+                                            <% } %>
+                                    </div><br>
 
-                <div class="centrar">
-                    <input type="text" name="phone" id="phone" class="inputText" size="40" placeholder=" Telefono"
-                        >
-                </div><br>
-
-                <div class="centrar">
-                    <input type="password" name="userPassword" id="userPassword" size="40" placeholder=" Contraseña"
-                        class="inputText" >
-                </div><br>
-
-                <div class="centrar">
-                    <input type="password" name="confirmPassword" id="confirmPassword" size="40" class="inputText"
-                        placeholder=" Confirmar contraseña" >
-                </div><br>
+                                    <div class="centrar">
+                                        <input type="password" name="confirmPassword" id="confirmPassword" size="40"  class="inputText" placeholder=" Confirmar contraseña">
+                                        
+                                    </div><br>
 
 
-                <div class="buttonContainer">
-                    <input type="submit" class="formsButton" value="Crear usuario">
-                </div> <br>
-                <div class="buttonContainer">
-                    <button type="reset" class="formsButton">Borrar</button>
-                </div>
-        </div><br><br>
+                                    <div class="buttonContainer">
+                                        <input type="submit" class="formsButton" value="Crear usuario">
+                                    </div> <br>
+                                    <div class="buttonContainer">
+                                        <button type="reset" class="formsButton">Borrar</button>
+                                    </div>
+                                </div><br><br>
 
-        </form>
+                            </form>
         </div><br>
 
         <div class="banner">
             <img src="img/banner-tires.jpeg" class="bannerDunlop" alt="bannerTires">
         </div><br>
-
+        </div>
     </main>
 
     <footer>
