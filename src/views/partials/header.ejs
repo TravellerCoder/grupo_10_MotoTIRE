@@ -11,14 +11,10 @@
         <input type="checkbox">
         <i class="fas fa-bars"></i>
         <i class="fas fa-times"></i>
+      
         <nav>
           <ul>
-            <li><a href="/lista-productos">Productos</a></li>
-          </ul>
-        </nav>
-        <nav>
-          <ul>
-           
+              <li><a href="/lista-productos">Productos</a></li>
               <li><a href="/registrarse">Registrarme</a></li>
               <li><a href="/ingresar">Ingresar</a></li>
               <li><a href="/mis-compras">Mis compras</a></li>
@@ -27,12 +23,14 @@
         </nav>
       </div>
 
-     
+      
 <div class="navbarList">
+  <% if (locals.userIsLogged) { %>
+    <li><a href="/mis-compras" class="hyperlink">Mis compras</a></li>
   <li><a href="/lista-productos" class="hyperlink">Productos</a>&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/registrarse" class="hyperlink">Registrarme</a>&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/ingresar" class="hyperlink">Ingresar</a>&nbsp;&nbsp;&nbsp;</li>
-  <li><a href="/mis-compras" class="hyperlink">Mis compras</a></li>
-  
+  <% } else { %>
+    <li><a href="/registrarse" class="hyperlink">Registrarme</a>&nbsp;&nbsp;&nbsp;</li>
+    <li><a href="/ingresar" class="hyperlink">Ingresar</a>&nbsp;&nbsp;&nbsp;</li>
+  <% } %>
 </div>
 </div>
