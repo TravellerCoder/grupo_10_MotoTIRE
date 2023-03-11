@@ -11,7 +11,7 @@ Tengas el tipo de moto que tengas, seguro que cuando vas a cambiar los neumátic
 Se brinda una experiencia insuperable en la elección y compra de neumáticos que cumplan las prestancias de confort y seguridad, que le permita tener al cliente la confianza de saber que su moto va responder cuando más lo necesite.
 
 ## Perfil del cliente
-Hombres y mujeres entre los 20 a los 50 años con alto interés de encontrar un producto que le ofrezca seguridad y confianza a la hora de rodar, con ingresos mensuales iguales o superiores a $150.000, preferiblemente de estrato socio-económico ABC1.
+Hombres y mujeres entre los 20 a los 50 años con alto interés de encontrar un producto que le ofrezca seguridad y confianza a la hora de rodar, con ingresos mensuales iguales o superiores a 1300 euros, preferiblemente de estrato socio-económico ABC1.
 
 ## Participante:
 - *Guillermo Bukowski*: Entrando en el mundo del desarrollo y programacion, amante de las dos ruedas.
