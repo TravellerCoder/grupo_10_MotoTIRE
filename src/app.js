@@ -7,9 +7,9 @@ const authRouter = require('./routers/authRouter');
 const methodOverride =  require('method-override'); // Pasar poder usar los métodos PUT y DELETE
 const cookies = require('cookie-parser');
 const session = require('express-session');
-const acceso = require('./middlewares/access');
+
 const db = require('../src/database/models')
-const userLoggedMidleware = require('../src/middlewares/userLoggedMidleware')
+const userLoggedMidleware = require('../src/middlewares/users/userLoggedMidleware')
 
 app.use(session({
   secret: 'admin',
@@ -18,12 +18,14 @@ app.use(session({
   
 }));
 
-app.use(acceso);
+
+
+
 app.use(methodOverride("_method"))
 app.use(express.urlencoded({extended: false})); //Para poder trabajar con los datos del JSON
 app.use(express.json())
 app.use(cookies());
-app.use(userLoggedMidleware)
+app.use(userLoggedMidleware);
 app.use(express.static('public')); // Carpeta publica 'public'
 
 /* CONFIGURACION VIEW ENGINE A EJS */

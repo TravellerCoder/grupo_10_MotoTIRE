@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include ('../partials/head') %>
+        <link href="css/styles-productCart.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <%- include ('../partials/header') %>
+    </header>
+
+    <main>
+        <h3 class="forms-subTitle">Lista de productos</h3><br>
+
+        <div class="productsBox">
+            <div class="boxTitle">
+                Productos listados por ID
+            </div>
+
+
+
+            <div class="itemsColumn">
+
+                <% searchedProducts.forEach(searchedProduct => { %>
+
+                    <div class="item1">
+                        <div class="image">
+                            <img src="/img/<%=searchedProduct.img%>" alt="productImg" width="150" />
+                        </div>
+
+                        <div class="description">
+                            <span>Marca: <%=searchedProduct.brand%></span><br>
+                            <span>Modelo: <%=searchedProduct.model%></span><br>
+                            <span>Medidas: <%=searchedProduct.measures%></span><br>
+                            <span>Precio: <%=searchedProduct.price%></span>
+                        </div><br>
+
+                        <div class="product-removal">
+                            <a href="/mis-compras">
+                                <button class="formsButtonShowProducts">
+                                    Comprar
+                                </button>
+                            </a>
+                        </div><br>
+                    </div>
+
+                    <% }) %>
+
+            </div>
+
+        </div>
+
+        <div class="banner">
+            <img src="img/bannerDunlop.png" class="bannerDunlop" alt="bannerDunlop">
+        </div>
+    </main>
+    <footer>
+        <%- include ('../partials/footer') %>
+    </footer>
+
+</body>
+
+</html>

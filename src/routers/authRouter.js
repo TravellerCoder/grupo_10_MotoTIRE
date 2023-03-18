@@ -20,10 +20,12 @@ const storage = multer.diskStorage({
 
 // EXPRESS-VALIDATOR
 const { body } = require('express-validator');
-const guestMidleware = require('../middlewares/guestMiddleware');
-const authMidleware = require('../middlewares/authMidleware');
 
-// CREAMOS CONSTANTE CON ARRAY DE VALIDACIONES DE FORMULARIO DE REGISTER.EJS
+// MIDDLEWARES 
+const guestMidleware = require('../middlewares/users/guestMiddleware');
+const authMidleware = require('../middlewares/users/authMidleware');
+
+// VALIDACIONES DE FORMULARIO DE REGISTRO
 
 const validationRegisterForm = [
     body('name').notEmpty().withMessage('El campo nombre es obligatorio').bail()
@@ -33,7 +35,7 @@ const validationRegisterForm = [
     body('userPassword').notEmpty().isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.'),
     body('confirmPassword').notEmpty().isLength({ min: 8 }).withMessage('La contraseña debe tener al menos 8 caracteres.')
 ]
-
+//  VALIDACIONES DE FORMULARIO DE LOGIN
 const validationsLogIn = [
     body('loginEmail').notEmpty().withMessage('Ingresa el mail').bail()
                         .isEmail().withMessage('Email invalido'),
@@ -51,12 +53,12 @@ router.post('/guardar-usuario', validationRegisterForm, authController.createUse
 router.get('/ingresar',guestMidleware, authController.renderLogin);
 router.post('/login', validationsLogIn, authController.loginProcess);
 
+//Modificacion de usuario
+router.get('/modificar-usuario', authController.userEdit);
+router.post('/guardar-usuario', validationRegisterForm, authController.createUser);
+
 //Perfil del usuario
 router.get('/perfil', authMidleware, authController.userProfile);
-
-//Modificacion de usuario
-router.get('/modificar-usuario',guestMidleware, authController.renderRegister);
-router.post('/guardar-usuario', validationRegisterForm, authController.createUser);
 
 //Log out del usuario
 router.get('/salir', authController.logOut)

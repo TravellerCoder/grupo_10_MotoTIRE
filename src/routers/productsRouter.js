@@ -17,9 +17,6 @@ const storage = multer.diskStorage({
     }
 });
 const upload = multer({ storage:storage });
-//const cpUpload = upload.fields([{ name: 'img', maxCount: 1 }, { name: 'subImg', maxCount: 2 }]);
-
-
 
 // CREAMOS VALIDACIONES DE CAMPOS DEL FOMULARIO DE CREACION/MODIFICACION DE PRODUCTO
 const validationCreateProductForm = [
@@ -40,7 +37,9 @@ const validationCreateProductForm = [
     })
 ]
 
-////////////////////////////////////////////
+-////////////////////////////////////////////
+router.get('/busqueda', productsController.searching)
+router.post('/busqueda', productsController.searched)
 
 router.get('/detalle-producto/:id', productsController.renderProductsDetail);
 

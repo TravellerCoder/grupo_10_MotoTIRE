@@ -14,7 +14,18 @@ const controller = {
         })
         const viewData = {inSaleProducts}
         return res.render(path.resolve('src/views/index'), viewData) 
+    },
+
+    searching: async(req, res) => {
+        const searchedProducts =  await Product.findByPk({
+            where: { brand: res.body.searcher}
+        })
+        console.log(searchedProducts)
+        const viewData = {searchedProducts}
+        return res.render(path.resolve('src/views/searchedProducts'), viewData)
     }
+    
+    
 };
 
 module.exports = {controller};

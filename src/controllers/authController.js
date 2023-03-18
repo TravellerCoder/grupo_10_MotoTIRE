@@ -5,13 +5,7 @@ const models = require('../database/models');
 const User = models.User;
 const { Op } = require('sequelize');
 
-/**  CREAMOS LA CONSTANTE PRODUCTS PARA SU UTILIZACIÓN
-const productsFilePath = path.resolve('./src/data/products.json');
-const products = JSON.parse(fs.readFileSync(productsFilePath, 'utf-8'));*/
 
-/**  CREAMOS LA CONSTANTE USERS PARA SU UTILIZACIÓN
-const usersFilePath = path.resolve('./src/data/users.json');
-const users = JSON.parse(fs.readFileSync(usersFilePath, 'utf-8'));*/
 
 // Express-validator
 const { validationResult } = require('express-validator');
@@ -19,7 +13,7 @@ const { validationResult } = require('express-validator');
 // BCRYPT para hashear contraseñas
 const bcrypt = require('bcryptjs');
 
-const guestMidleware = require('../middlewares/guestMiddleware')
+const guestMidleware = require('../middlewares/users/guestMiddleware')
 
 
 
@@ -28,6 +22,7 @@ const authController = {
 
 
     renderRegister: (req, res) => {
+        
         res.render(path.resolve('src/views/users/register'));
     },
 
@@ -38,7 +33,7 @@ const authController = {
 
     createUser: async (req, res) => {
         const validationErrors = validationResult(req);
-        /////////////////////////////Revision de errores en el formulario de registro
+        ///Revision de errores en el formulario de registro
         if (validationErrors.errors.length > 0) {
             return res.render(path.resolve('src/views/users/register'), {
                 errors: validationErrors.mapped(),
@@ -91,26 +86,29 @@ const authController = {
 
 
     loginProcess: async (req, res) => {
-        let userToLogIn = await User.findOne({
+        
+        const userToLogIn = await User.findOne({
             where: { email: req.body.loginEmail }
         });
         if (userToLogIn) {
-            if (userToLogIn) {
-                const passwordYes = bcrypt.compareSync(req.body.loginPassword, userToLogIn.userPassword);
-                if (passwordYes) {
-                    delete userToLogIn.userPassword;
-                    delete userToLogIn.userconfirmPassword;
-                    req.session.userLogged = userToLogIn
-                    
-                    /**if (req.body.rememberMe) {
-                        res.cookie("userEmail", req.body.userEmail, { maxAge: 1000 * 60 * 10 });
-                    }*/
-                    
-                    
-                    return res.redirect('/perfil')
+            const passwordYes = bcrypt.compareSync(req.body.loginPassword, userToLogIn.userPassword);
+            if (passwordYes) {
+                delete userToLogIn.userPassword;
+                delete userToLogIn.confirmPassword 
+                
+                req.session.userLogged = userToLogIn
 
+
+                if (req.body.remember) {
+                    res.cookie("userEmail", req.body.userEmail, { maxAge: 1000 * 60 * 10 });
                 }
+                
+                return res.redirect('/perfil')
+
+
+
             }
+            
             return res.render(path.resolve('src/views/users/login'), {
                 errors: {
                     loginEmail: {
@@ -123,10 +121,35 @@ const authController = {
     },
 
     userProfile: (req, res) => {
-        return res.render(path.resolve('src/views/users/user'),{
-            userin : req.session.userLogged
+        
+        
+        return res.render(path.resolve('src/views/users/user'), {
+            userin: req.session.userLogged
         })
     },
+
+    userEdit: async (req, res) => {
+        const usersData = {
+            name: req.body.name,
+            lastName: req.body.lastName,
+            email: req.body.email,
+            adress: req.body.adress,
+            city: req.body.city,
+            country: req.body.country,
+            postalCode: req.body.postalCode,
+            phone: req.body.phone,
+            
+        }
+        let userUpDated = User.update(usersData, {
+            where: {
+                user_id: req.params.user_id
+            }
+        })
+            .then(user => {
+                res.redirect('/perfil');
+            })
+    },
+
 
     logOut: (req, res) => {
         req.session.destroy();

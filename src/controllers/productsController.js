@@ -77,8 +77,6 @@ const productsController = {
         
     }, 
     updateProduct: async (req, res) =>{
-
-
             const data = {
                 brand: req.body.brand,
                 model: req.body.model,
@@ -120,6 +118,17 @@ const productsController = {
             }
         })
         res.redirect('/'); 
+    },
+
+    searching: async(req, res) => {
+        const searchedProducts =  await Product.findAll(req.body.searcher)
+        console.log(searchedProducts)
+        
+        return res.render(path.resolve('src/views/products/searchedProducts'), {searchedProducts})
+    }, 
+
+    searched: (req, res) => {
+        return res.render(path.resolve('src/views/products/searchedProducts'), {searchedProducts})
     }
 }
 
