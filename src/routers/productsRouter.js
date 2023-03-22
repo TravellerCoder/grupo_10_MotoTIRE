@@ -58,7 +58,7 @@ router.put('/modificar-producto/:id',upload.single('img'), productsController.up
 // Eliminar producto
 router.get('/eliminar-producto/:id', productsController.renderDeleteForm)
 router.delete('/eliminar-producto/:id', productsController.deleteProduct); 
-
+// Buscar producto
 router.get('/busqueda', productsController.searching)
 router.post('/busqueda', productsController.searched)
 

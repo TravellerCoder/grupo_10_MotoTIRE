@@ -127,7 +127,6 @@ const productsController = {
         const searchedProducts = await Product.findAll({
             where : { brand : req.body.searcher}
         })
-        console.log(searchedProducts)
         return res.render(path.resolve('src/views/products/searchedProducts'), {searchedProducts})
         }
     }

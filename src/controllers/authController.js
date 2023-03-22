@@ -101,7 +101,7 @@ const authController = {
 
 
                 if (req.body.remember) {
-                    res.cookie("userEmail", req.body.userEmail, { maxAge: 1000 * 60 * 10 });
+                    res.cookie("userEmail", req.body.userEmail, { maxAge: 100 * 60 * 10 });
                 }
                 
                 return res.redirect('/perfil')
@@ -147,7 +147,7 @@ const authController = {
             }
         })
             .then(user => {
-                res.redirect('/perfil');
+                res.render(path.resolve('src/views/users/editUser'), {userUpDated});
             })
     },
 
