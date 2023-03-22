@@ -16,7 +16,7 @@
 
         <div class="productsBox">
             <div class="boxTitle">
-                Productos listados por ID
+                Resultado de tu busqueda
             </div>
 
 
@@ -36,14 +36,25 @@
                             <span>Medidas: <%=searchedProduct.measures%></span><br>
                             <span>Precio: <%=searchedProduct.price%></span>
                         </div><br>
+                        <% if (userIsLogged) { %>
+                            <div class="product-removal">
+                                <a href="/mis-compras">
+                                    <button class="formsButtonShowProducts">
+                                        Comprar
+                                    </button>
+                                </a>
+                            </div><br>
+                            <% } else { %>
 
-                        <div class="product-removal">
-                            <a href="/mis-compras">
-                                <button class="formsButtonShowProducts">
-                                    Comprar
-                                </button>
-                            </a>
-                        </div><br>
+
+                                <div class="product-removal">
+                                    <a href="/ingresar">
+                                        <button class="formsButtonShowProducts">
+                                            Ingresa para comprar!
+                                        </button>
+                                    </a>
+                                </div><br>
+                                <% } %>
                     </div>
 
                     <% }) %>

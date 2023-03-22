@@ -119,19 +119,18 @@ const productsController = {
         })
         res.redirect('/'); 
     },
-
-    searching: async(req, res) => {
-        const searchedProducts =  await Product.findAll(req.body.searcher)
-        console.log(searchedProducts)
-        
-        return res.render(path.resolve('src/views/products/searchedProducts'), {searchedProducts})
+    searching: (req, res) => {
+        return res.render(path.resolve('src/views/index'))
     }, 
 
-    searched: (req, res) => {
+    searched:async (req, res) => {
+        const searchedProducts = await Product.findAll({
+            where : { brand : req.body.searcher}
+        })
+        console.log(searchedProducts)
         return res.render(path.resolve('src/views/products/searchedProducts'), {searchedProducts})
+        }
     }
-}
-
 
 
 

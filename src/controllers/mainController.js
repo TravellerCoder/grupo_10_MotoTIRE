@@ -15,17 +15,23 @@ const controller = {
         const viewData = {inSaleProducts}
         return res.render(path.resolve('src/views/index'), viewData) 
     },
+    /*!searching: (req, res) => {
+        
+        
+        
+        return res.redirect('/')
+    }, 
 
-    searching: async(req, res) => {
-        const searchedProducts =  await Product.findByPk({
-            where: { brand: res.body.searcher}
+    searched:async (req, res) => {
+        const searchedProducts = await Product.findAll({
+            where : { brand : req.body.searcher}
+           
         })
-        console.log(searchedProducts)
-        const viewData = {searchedProducts}
-        return res.render(path.resolve('src/views/searchedProducts'), viewData)
+        return res.send(searchedProducts)
     }
+    /**path.resolve('src/views/products/searchedProducts'), searchedProducts */
+
     
-    
-};
+}
 
 module.exports = {controller};
