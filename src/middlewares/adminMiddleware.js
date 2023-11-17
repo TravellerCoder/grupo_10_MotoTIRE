@@ -1,4 +1,4 @@
-
+const path = require('path')
 
 const User = require('../database/models/User');
 
@@ -8,11 +8,11 @@ async function adminMiddleware(req, res, next) {
         if (user.role === 'admin' || bcrypt.compareSync('admin@mototire.com', user.email)) {
             return next();
         } else {
-            return res.redirect('/users/login');
+            return  res.render(path.resolve('src/views/users/register'));
         }
     } catch (error) {
         console.log(error);
-        return res.redirect('/users/login');
+        return res.render(path.resolve('src/views/users/register'));
     }
 }
 
