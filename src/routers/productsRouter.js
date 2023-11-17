@@ -7,6 +7,7 @@ const { body } = require('express-validator');
 const db = require('../database/models')
 
 const multer = require('multer');
+const adminMiddleware = require('../middlewares/adminMiddleware');
 const storage = multer.diskStorage({
     destination: function(req, file, cb){
         cb(null, path.resolve('public/img'))
@@ -43,20 +44,20 @@ router.get('/detalle-producto/:id', productsController.renderProductsDetail);
 
 router.get('/mis-compras', productsController.renderProductsCart);
 
-router.get('/administrar-producto', productsController.renderAdminProduct);
+router.get('/administrar-producto', adminMiddleware, productsController.renderAdminProduct);
 
 router.get('/lista-productos', productsController.renderShowProducts);
 
 // Creación de producto
-router.get('/crear-producto', productsController.renderCreateProduct);
+router.get('/crear-producto',adminMiddleware, productsController.renderCreateProduct);
 router.post('/guardar-producto',upload.single('img'), productsController.storeProduct);
 
 //Edición de producto
-router.get('/modificar-producto/:id', productsController.renderEditProduct);
+router.get('/modificar-producto/:id',adminMiddleware, productsController.renderEditProduct);
 router.put('/modificar-producto/:id',upload.single('img'), productsController.updateProduct);
 
 // Eliminar producto
-router.get('/eliminar-producto/:id', productsController.renderDeleteForm)
+router.get('/eliminar-producto/:id',adminMiddleware, productsController.renderDeleteForm)
 router.delete('/eliminar-producto/:id', productsController.deleteProduct); 
 // Buscar producto
 router.get('/busqueda', productsController.searching)

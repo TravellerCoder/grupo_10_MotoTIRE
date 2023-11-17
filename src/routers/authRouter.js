@@ -37,7 +37,7 @@ const validationRegisterForm = [
 ]
 //  VALIDACIONES DE FORMULARIO DE LOGIN
 const validationsLogIn = [
-    body('loginEmail').notEmpty().withMessage('Ingresa el mail').bail()
+    body('loginEmail').notEmpty().withMessage('Ingresa el mail')
                         .isEmail().withMessage('Email invalido'),
     body('loginPassword').notEmpty().withMessage('Tenes que ingresar tu contraseña.')
     
@@ -51,7 +51,7 @@ router.post('/guardar-usuario', validationRegisterForm, authController.createUse
 
 // Login de usuario
 router.get('/ingresar',guestMidleware, authController.renderLogin);
-router.post('/login', validationsLogIn, authController.loginProcess);
+router.post('/ingresar', validationsLogIn, authController.loginProcess);
 
 //Modificacion de usuario
 router.get('/modificar-usuario', authController.userEdit);

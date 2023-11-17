@@ -4,9 +4,11 @@ const path = require('path');
 const mainRouter = require('./routers/mainRouter');
 const productsRouter = require('./routers/productsRouter');
 const authRouter = require('./routers/authRouter');
+const paymentRouter = require('./routers/paymentRouter')
 const methodOverride =  require('method-override'); // Pasar poder usar los métodos PUT y DELETE
 const cookies = require('cookie-parser');
 const session = require('express-session');
+const morgan = require('morgan');
 
 const db = require('../src/database/models')
 const userLoggedMidleware = require('../src/middlewares/users/userLoggedMidleware')
@@ -22,11 +24,12 @@ app.use(session({
 
 
 app.use(methodOverride("_method"))
-app.use(express.urlencoded({extended: false})); //Para poder trabajar con los datos del JSON
+app.use(express.urlencoded({extended: false})); //Para poder trabajar con los datos del formulario.
 app.use(express.json())
 app.use(cookies());
 app.use(userLoggedMidleware);
 app.use(express.static('public')); // Carpeta publica 'public'
+app.use(morgan('dev'));
 
 /* CONFIGURACION VIEW ENGINE A EJS */
 app.set('view engine','ejs');
@@ -43,3 +46,5 @@ app.use(mainRouter);
 app.use(productsRouter);
 
 app.use(authRouter);
+
+app.use(paymentRouter);

@@ -22,12 +22,12 @@ const authController = {
 
 
     renderRegister: (req, res) => {
-        
+
         res.render(path.resolve('src/views/users/register'));
     },
 
     renderLogin: (req, res) => {
-        
+
         res.render(path.resolve('src/views/users/login'));
     },
 
@@ -55,7 +55,7 @@ const authController = {
             })
         }
 
-        
+
 
         let userToCreate = {
             ...req.body,
@@ -87,7 +87,15 @@ const authController = {
 
 
     loginProcess: async (req, res) => {
-        
+        const loginValidationErrors = validationResult(req);
+        ///Revision de errores en el formulario de login
+        if (loginValidationErrors.errors.length > 0) {
+            return res.render(path.resolve('src/views/users/login'), {
+                errors: loginValidationErrors.mapped(),
+                oldData: req.body
+            })
+        }
+
         const userToLogIn = await User.findOne({
             where: { email: req.body.loginEmail }
         });
@@ -95,31 +103,39 @@ const authController = {
             const passwordYes = bcrypt.compareSync(req.body.loginPassword, userToLogIn.userPassword);
             if (passwordYes) {
                 delete userToLogIn.userPassword;
-                delete userToLogIn.confirmPassword 
-                
-                req.session.userLogged = userToLogIn
+                delete userToLogIn.confirmPassword
 
+                req.session.userLogged = userToLogIn
 
                 if (req.body.remember) {
                     res.cookie("userEmail", req.body.userEmail, { maxAge: 100 * 60 * 10 });
                 }
-                
                 return res.redirect('/perfil')
+            }else {
+                return res.render(path.resolve('src/views/users/login'), {
+                    errors: {
+                        loginPassword: {
+                            passwordErrorMsg: 'Lo datos no coinciden',
+                        }
+                    },
+                    oldData: req.body
+                })
+            } 
+        }
+    
 
-
-
-            }
-            
             return res.render(path.resolve('src/views/users/login'), {
                 errors: {
                     loginEmail: {
-                        msg: 'Los datos ingresados son incorrectos'
+                        noUserMsg: 'Usuario no registrado',
                     }
                 },
                 oldData: req.body
             })
-        }
-    },
+
+        },
+    
+    
 
     userProfile: (req, res) => {
         

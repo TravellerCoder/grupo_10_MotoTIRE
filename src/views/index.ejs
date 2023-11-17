@@ -88,7 +88,7 @@
                 </div>
                 <div class="main-article">
                     <div class="precio-descuento">
-                        <p class="price"><%= inSaleProduct.price * (1 - inSaleProduct.discount / 100) %>e</p>
+                        <p class="price">$<%= inSaleProduct.price * (1 - inSaleProduct.discount / 100) %></p>
                         <p class="discount"><% if (inSaleProduct.discount > 0) { %>
                             <span> <%=inSaleProduct.discount %> % OFF</span>
                         <% } %></p>
