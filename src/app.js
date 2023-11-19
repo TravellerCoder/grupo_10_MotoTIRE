@@ -4,14 +4,16 @@ const path = require('path');
 const mainRouter = require('./routers/mainRouter');
 const productsRouter = require('./routers/productsRouter');
 const authRouter = require('./routers/authRouter');
-const paymentRouter = require('./routers/paymentRouter')
 const methodOverride =  require('method-override'); // Pasar poder usar los métodos PUT y DELETE
 const cookies = require('cookie-parser');
 const session = require('express-session');
 const morgan = require('morgan');
+const dotenv = require('dotenv')
 
 const db = require('../src/database/models')
 const userLoggedMidleware = require('../src/middlewares/users/userLoggedMidleware')
+
+dotenv.config();
 
 app.use(session({
   secret: 'admin',
@@ -47,4 +49,3 @@ app.use(productsRouter);
 
 app.use(authRouter);
 
-app.use(paymentRouter);
